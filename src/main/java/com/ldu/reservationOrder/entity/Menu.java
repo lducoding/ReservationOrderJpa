@@ -1,8 +1,15 @@
 package com.ldu.reservationOrder.entity;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Table(name = "MENU")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Menu {
 
     @Id
@@ -10,7 +17,10 @@ public class Menu {
     @Column(name="menu_id")
     private Long menuId;
 
-    private Long restaurantId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurantMenu;
+
     private String menuName;
     private int menuPrice;
     private String menuImg;
