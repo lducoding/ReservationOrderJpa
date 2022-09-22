@@ -44,7 +44,7 @@ public class WebSecurityConfig {
                 .addFilter(jwtAuthenticationFilter)
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), resMemberRepository))
                 .authorizeRequests()
-//                .antMatchers("/res/hello").hasRole("CUSTOMER")
+//                .antMatchers("/res/hello/*").hasRole("SELLER")
                 .anyRequest().permitAll();
         return http.build();
     }
