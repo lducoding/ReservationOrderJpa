@@ -1,9 +1,7 @@
 package com.ldu.reservationOrder.dto;
 
-import com.ldu.reservationOrder.entity.Restaurant;
+import com.ldu.reservationOrder.entity.ResUser;
 import com.ldu.reservationOrder.entity.UserRole;
-
-import javax.persistence.*;
 
 public class ResUserDto {
 
@@ -14,4 +12,13 @@ public class ResUserDto {
     private UserRole roles;
     private String birth;
     private int mileage;
+
+    public ResUserDto(ResUser resUserDto) {
+        this.resUserId = resUserDto.getResUserId();
+        this.name = resUserDto.getName();
+        this.email = resUserDto.getEmail();
+        this.roles = resUserDto.getRoles();
+        this.birth = resUserDto.getBirth();
+        this.mileage = resUserDto.getMileage();
+    }
 }

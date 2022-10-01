@@ -40,4 +40,8 @@ public class ResUser {
     public void setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
     }
+
+    public ResUser(String name) {
+        this.name = name;
+    }
 }

@@ -14,15 +14,14 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ResUserService {
 
-    private final ResJdbcRepository resJdbcRepository;
+//    private final ResJdbcRepository resJdbcRepository;
     private final ResUserRepository resUserRepository;
-    private final ResRepositoryCustom resRepositoryCustom;
+//    private final ResRepositoryCustom resRepositoryCustom;
 
 
     public ResUserDto userInfo(Long userId) {
-        resUserRepository.findById(userId).orElseGet( o -> new ResUser());
-
-
-        return null;
+        ResUser resUser = resUserRepository.findById(userId).orElseGet(() -> new ResUser("empty"));
+        ResUserDto resUserDto = new ResUserDto(resUser);
+        return resUserDto;
     }
 }
