@@ -1,7 +1,7 @@
 package com.ldu.reservationOrder.config.auth;
 
 import com.ldu.reservationOrder.entity.ResUser;
-import com.ldu.reservationOrder.repository.ResMemberRepository;
+import com.ldu.reservationOrder.repository.ResUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class PrincipalDetailsService implements UserDetailsService {
 
-    private final ResMemberRepository resMemberRepository;
+    private final ResUserRepository resMemberRepository;
 
 
     @Override

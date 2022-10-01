@@ -2,7 +2,7 @@ package com.ldu.reservationOrder.config;
 
 import com.ldu.reservationOrder.config.jwt.JwtAuthenticationFilter;
 import com.ldu.reservationOrder.config.jwt.JwtAuthorizationFilter;
-import com.ldu.reservationOrder.repository.ResMemberRepository;
+import com.ldu.reservationOrder.repository.ResUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ import org.springframework.web.filter.CorsFilter;
 public class WebSecurityConfig {
 
     private final CorsFilter corsFilter;
-    private final ResMemberRepository resMemberRepository;
+    private final ResUserRepository resUserRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -42,7 +42,7 @@ public class WebSecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .addFilter(jwtAuthenticationFilter)
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), resMemberRepository))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), resUserRepository))
                 .authorizeRequests()
 //                .antMatchers("/res/hello/*").hasRole("SELLER")
                 .anyRequest().permitAll();
