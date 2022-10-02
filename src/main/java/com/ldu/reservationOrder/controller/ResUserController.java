@@ -18,10 +18,11 @@ public class ResUserController {
 
     private final ResUserService resUserService;
 
-    @GetMapping("/userInfo/{userId}")
+    @GetMapping("/userInfo/{resUserId}")
     public ResponseEntity<ResUserDto> userInfo(@PathVariable Long resUserId) {
         HttpHeaders httpHeaders = new HttpHeaders();
         ResUserDto userInfo = resUserService.userInfo(resUserId);
-        return new ResponseEntity<ResUserDto>(userInfo, httpHeaders, HttpStatus.OK);
+        ResponseEntity<ResUserDto> resUserDtoResponseEntity = new ResponseEntity<>(userInfo, httpHeaders, HttpStatus.OK);
+        return resUserDtoResponseEntity;
     }
 }
