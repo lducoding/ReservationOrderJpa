@@ -24,4 +24,8 @@ public class ResUserService {
         ResUserDto resUserDto = new ResUserDto(resUser);
         return resUserDto;
     }
+
+    public Long registerUser(ResUserDto resUserDto) {
+        return null;
+    }
 }
