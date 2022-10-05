@@ -2,9 +2,13 @@ package com.ldu.reservationOrder.dto;
 
 import com.ldu.reservationOrder.entity.ResUser;
 import com.ldu.reservationOrder.entity.UserRole;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class ResUserDto {
 
     private Long resUserId;

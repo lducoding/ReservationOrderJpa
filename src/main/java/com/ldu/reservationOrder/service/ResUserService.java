@@ -26,6 +26,8 @@ public class ResUserService {
     }
 
     public Long registerUser(ResUserDto resUserDto) {
-        return null;
+        ResUser resUser = new ResUser(resUserDto);
+        ResUser save = resUserRepository.save(resUser);
+        return save.getResUserId();
     }
 }

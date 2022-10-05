@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.entity;
 
+import com.ldu.reservationOrder.dto.ResUserDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,5 +44,14 @@ public class ResUser {
 
     public ResUser(String name) {
         this.name = name;
+    }
+
+    public ResUser(ResUserDto resUserDto) {
+        this.pass = resUserDto.getPass();
+        this.name = resUserDto.getName();
+        this.email = resUserDto.getEmail();
+        this.roles = resUserDto.getRoles();
+        this.birth = resUserDto.getBirth();
+        this.mileage = resUserDto.getMileage();
     }
 }
