@@ -26,8 +26,19 @@ public class ResUserService {
     }
 
     public Long registerUser(ResUserDto resUserDto) {
-        ResUser resUser = new ResUser(resUserDto);
-        ResUser save = resUserRepository.save(resUser);
-        return save.getResUserId();
+        if(duplicateUser(resUserDto.getEmail())) {
+            ResUser resUser = new ResUser(resUserDto);
+            ResUser save = resUserRepository.save(resUser);
+            return save.getResUserId();
+        }
+        return 0L;
+    }
+
+    public boolean duplicateUser(String email) {
+        ResUser byEmail = resUserRepository.findByEmail(email);
+        if(byEmail == null) {
+            return true;
+        }
+        return false;
     }
 }
