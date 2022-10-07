@@ -24,9 +24,12 @@ public class ResUserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<Long> registerUser(@RequestBody ResUserDto ResUserDto) {
+    public ResponseEntity<Long> registerUser(@RequestBody ResUserDto ResUserDto) throws Exception {
         HttpHeaders httpHeaders = new HttpHeaders();
         Long registerUserId = resUserService.registerUser(ResUserDto);
+        if(registerUserId == 0) {
+            throw new Exception("중복된 회원이 존재합니다.");
+        }
         return new ResponseEntity<Long>(registerUserId, httpHeaders, HttpStatus.OK);
     }
 }
