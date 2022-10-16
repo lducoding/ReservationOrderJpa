@@ -19,12 +19,12 @@ public class ResUserDto {
     private String birth;
     private int mileage;
 
-    public ResUserDto(ResUser resUserDto) {
-        this.resUserId = resUserDto.getResUserId();
-        this.name = resUserDto.getName();
-        this.email = resUserDto.getEmail();
-        this.roles = resUserDto.getRoles();
-        this.birth = resUserDto.getBirth();
-        this.mileage = resUserDto.getMileage();
+    public ResUserDto(ResUser resUser) {
+        this.resUserId = resUser.getResUserId();
+        this.name = resUser.getName();
+        this.email = resUser.getEmail();
+        this.roles = resUser.getRoles();
+        this.birth = resUser.getBirth();
+        this.mileage = resUser.getMileage();
     }
 }
