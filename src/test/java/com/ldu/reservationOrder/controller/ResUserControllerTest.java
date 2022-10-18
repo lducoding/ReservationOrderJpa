@@ -36,7 +36,6 @@ class ResUserControllerTest {
     private MockMvc mockMvc;
 
 
-
     @Test
     void userInfoTest() throws Exception {
         given(resUserService.userInfo(1L)).willReturn(new ResUserDto

@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ResUserService {
 
-//    private final ResJdbcRepository resJdbcRepository;
+    //    private final ResJdbcRepository resJdbcRepository;
     private final ResUserRepository resUserRepository;
 //    private final ResRepositoryCustom resRepositoryCustom;
 
@@ -26,17 +26,17 @@ public class ResUserService {
     }
 
     public Long registerUser(ResUserDto resUserDto) {
-        if(duplicateUser(resUserDto.getEmail())) {
-            ResUser resUser = new ResUser(resUserDto);
-            ResUser save = resUserRepository.save(resUser);
-            return save.getResUserId();
+        if (duplicateUser(resUserDto.getEmail())) {
+            return 0L;
         }
-        return 0L;
+        ResUser resUser = new ResUser(resUserDto);
+        ResUser save = resUserRepository.save(resUser);
+        return save.getResUserId();
     }
 
     public boolean duplicateUser(String email) {
         ResUser byEmail = resUserRepository.findByEmail(email);
-        if(byEmail == null) {
+        if (byEmail == null) {
             return true;
         }
         return false;
