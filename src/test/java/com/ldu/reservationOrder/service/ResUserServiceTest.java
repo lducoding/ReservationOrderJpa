@@ -36,21 +36,23 @@ class ResUserServiceTest {
         assertEquals(resUserDtoOrigin2.getName(), "empty");
     }
 
-//    @Test
-//    public void registerUserTest() {
-//        ResUserDto resUserDto = new ResUserDto(null, "asd", "dk", "lbrve@naver.com", UserRole.ROLE_CUSTOMER, "19920415", 10);
-//        ResUserDto resUserDto1 = new ResUserDto(null, "asd", "dk", "lbrve2@1111naver.com", UserRole.ROLE_CUSTOMER, "19920415", 10);
-//        Long aLong = resUserService.registerUser(resUserDto);
-//        Long aLong1 = resUserService.registerUser(resUserDto1);
-//
-////        assertEquals(aLong, 0L);
-//        assertEquals(aLong1, 4L);
-//    }
+    @Test
+    public void registerUserTest() {
+        ResUserDto resUserDto = new ResUserDto(null, "asd", "dk", "aaaa", UserRole.ROLE_CUSTOMER, "19920415", 10);
+        ResUserDto resUserDto1 = new ResUserDto(null, "asd", "dk", "lbrve2@1111naver.com", UserRole.ROLE_CUSTOMER, "19920415", 10);
+        Long aLong = resUserService.registerUser(resUserDto);
+        Long aLong1 = resUserService.registerUser(resUserDto1);
+
+        assertEquals(aLong, 0L);
+        assertEquals(aLong1, 6L);
+    }
 
     @Test
     public void duplicateUserTest() {
-        boolean checkEmail = resUserService.duplicateUser("lbr222ve@naver.com");
-        assertEquals(checkEmail, true);
+        boolean checkEmail = resUserService.duplicateUser("aaaa");
+        boolean checkEmail2 = resUserService.duplicateUser("lbrve@naver.com");
+        assertEquals(checkEmail, false);
+        assertEquals(checkEmail2, true);
     }
 
 }

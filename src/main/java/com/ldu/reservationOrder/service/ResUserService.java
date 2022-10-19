@@ -37,8 +37,10 @@ public class ResUserService {
     public boolean duplicateUser(String email) {
         ResUser byEmail = resUserRepository.findByEmail(email);
         if (byEmail == null) {
-            return true;
+            System.out.println("중복아님");
+            return false;
         }
-        return false;
+        System.out.println("중복");
+        return true;
     }
 }
