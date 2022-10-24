@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ldu.reservationOrder.dto.ResUserDto;
 import com.ldu.reservationOrder.entity.UserRole;
 import com.ldu.reservationOrder.service.ResUserService;
@@ -37,6 +38,9 @@ class ResUserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
     @Test
     void userInfoTest() throws Exception {
@@ -53,12 +57,15 @@ class ResUserControllerTest {
         ResUserDto resUserDto = new ResUserDto(99L, "password", "마법사", "kokoa@koko.com",
             UserRole.ROLE_SELLER, "19920415", 1000);
 
+        String content  = objectMapper.writeValueAsString(resUserDto);
+
         given(resUserService.registerUser(resUserDto)).willReturn(99L);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/user")
-                .content(String.valueOf(resUserDto))
-                .contentType(MediaType.APPLICATION_JSON));
-//            .andExpect(MockMvcResultMatchers.status().isOk());
+                .content(content)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk());
 //            .andDo(MockMvcResultHandlers.print());
     }
 }
