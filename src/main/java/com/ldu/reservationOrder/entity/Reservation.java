@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,4 +28,14 @@ public class Reservation {
 
     private String reservationDate;
     private String reservationStatus;
+
+    @Builder
+    public Reservation(Long reservationId, ResUser resUser, Restaurant restaurantReservation,
+        String reservationDate, String reservationStatus) {
+        this.reservationId = reservationId;
+        this.resUser = resUser;
+        this.restaurantReservation = restaurantReservation;
+        this.reservationDate = reservationDate;
+        this.reservationStatus = reservationStatus;
+    }
 }

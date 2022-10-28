@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -46,5 +47,20 @@ public class Restaurant {
     public void addGoal(Goal goal) {
         this.goal = goal;
         goal.setRestaurant(this);
+    }
+
+    @Builder
+    public Restaurant(Long restaurantId, ResUser resUser, Goal goal, String location,
+        String restaurantName, String category, int standardTime, List<Reservation> reservations,
+        List<Menu> menus) {
+        this.restaurantId = restaurantId;
+        this.resUser = resUser;
+        this.goal = goal;
+        this.location = location;
+        this.restaurantName = restaurantName;
+        this.category = category;
+        this.standardTime = standardTime;
+        this.reservations = reservations;
+        this.menus = menus;
     }
 }

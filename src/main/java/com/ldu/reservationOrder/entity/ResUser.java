@@ -2,6 +2,7 @@ package com.ldu.reservationOrder.entity;
 
 import com.ldu.reservationOrder.dto.ResUserDto;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,12 +47,17 @@ public class ResUser {
         this.name = name;
     }
 
-    public ResUser(ResUserDto resUserDto) {
-        this.pass = resUserDto.getPass();
-        this.name = resUserDto.getName();
-        this.email = resUserDto.getEmail();
-        this.roles = resUserDto.getRoles();
-        this.birth = resUserDto.getBirth();
-        this.mileage = resUserDto.getMileage();
+    @Builder
+    public ResUser(Long resUserId, Restaurant restaurant, String pass, String name, String email,
+        UserRole roles, String birth, int mileage, List<Reservation> reservations) {
+        this.resUserId = resUserId;
+        this.restaurant = restaurant;
+        this.pass = pass;
+        this.name = name;
+        this.email = email;
+        this.roles = roles;
+        this.birth = birth;
+        this.mileage = mileage;
+        this.reservations = reservations;
     }
 }

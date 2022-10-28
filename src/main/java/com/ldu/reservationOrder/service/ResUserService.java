@@ -29,7 +29,14 @@ public class ResUserService {
         if (duplicateUser(resUserDto.getEmail())) {
             return 0L;
         }
-        ResUser resUser = new ResUser(resUserDto);
+        ResUser resUser = ResUser.builder()
+            .birth(resUserDto.getBirth())
+            .email(resUserDto.getEmail())
+            .mileage(resUserDto.getMileage())
+            .name(resUserDto.getName())
+            .pass(resUserDto.getPass())
+            .roles(resUserDto.getRoles())
+            .build();
         ResUser save = resUserRepository.save(resUser);
         return save.getResUserId();
     }
