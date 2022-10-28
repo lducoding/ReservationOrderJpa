@@ -5,10 +5,8 @@ import com.ldu.reservationOrder.entity.Menu;
 import com.ldu.reservationOrder.entity.ResUser;
 import com.ldu.reservationOrder.entity.Reservation;
 import com.ldu.reservationOrder.entity.Restaurant;
-import com.ldu.reservationOrder.repository.MenuRepository;
-import com.ldu.reservationOrder.repository.ResUserRepository;
-import com.ldu.reservationOrder.repository.ReservationRepository;
-import com.ldu.reservationOrder.repository.RestaurantRepository;
+import com.ldu.reservationOrder.repository.*;
+
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +19,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final ResUserRepository resUserRepository;
     private final RestaurantRepository restaurantRepository;
-    private final MenuRepository menuRepository;
+    private final ReservationMenuRepository reservationMenuRepository;
 
 
     public Long registerReservation(ReservationDto reservationDto) {
@@ -44,7 +42,7 @@ public class ReservationService {
             );
 
             for (Long menuId: reservationDto.getMenuIdList()) {
-                Menu menu = menuRepository.getReferenceById(savedReservation, menuId);
+                reservationMenuRepository.getReferenceById(savedReservation.getReservationId(), menuId);
             }
 
         }
