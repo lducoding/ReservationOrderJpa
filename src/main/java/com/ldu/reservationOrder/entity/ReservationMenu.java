@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,4 +25,11 @@ public class ReservationMenu {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     private Menu menu;
+
+    @Builder
+    public ReservationMenu(Long reservationMenuId, Reservation reservation, Menu menu) {
+        this.reservationMenuId = reservationMenuId;
+        this.reservation = reservation;
+        this.menu = menu;
+    }
 }

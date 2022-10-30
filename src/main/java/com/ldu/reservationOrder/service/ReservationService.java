@@ -1,10 +1,7 @@
 package com.ldu.reservationOrder.service;
 
 import com.ldu.reservationOrder.dto.ReservationDto;
-import com.ldu.reservationOrder.entity.Menu;
-import com.ldu.reservationOrder.entity.ResUser;
-import com.ldu.reservationOrder.entity.Reservation;
-import com.ldu.reservationOrder.entity.Restaurant;
+import com.ldu.reservationOrder.entity.*;
 import com.ldu.reservationOrder.repository.*;
 
 import java.util.List;
@@ -42,7 +39,9 @@ public class ReservationService {
             );
 
             for (Long menuId: reservationDto.getMenuIdList()) {
-                reservationMenuRepository.getReferenceById(savedReservation.getReservationId(), menuId);
+                ReservationMenu.builder().
+                savedReservation.getReservationId(), menuId
+                reservationMenuRepository.save();
             }
 
         }
