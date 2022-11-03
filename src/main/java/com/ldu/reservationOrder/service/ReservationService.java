@@ -20,9 +20,15 @@ public class ReservationService {
 
 
     public Long registerReservation(ReservationDto reservationDto) {
-        ResUser resUser = resUserRepository.getReferenceById(reservationDto.getResUserId());
+        ResUser resUser = resUserRepository.findById(reservationDto.getResUserId())
+            .orElseGet(() -> ResUser.builder().resUserId(-1L).build());
 
-        Restaurant restaurant = restaurantRepository.getReferenceById(reservationDto.getRestaurantId());
+        Restaurant restaurant = restaurantRepository.findById(reservationDto.getRestaurantId())
+            .orElseGet(() -> Restaurant.builder().restaurantId(-1L).build());
+
+//        ResUser resUser = resUserRepository.getReferenceById(reservationDto.getResUserId());
+//
+//        Restaurant restaurant = restaurantRepository.getReferenceById(reservationDto.getRestaurantId());
 
         if (resUser.getResUserId() == -1L || restaurant.getRestaurantId() == -1L) {
             return -1L;
@@ -36,6 +42,7 @@ public class ReservationService {
                     .build()
             );
 
+            reservationRepository.getReferenceById()
             // 벌크로 reservation_menu에 값 넣기
 
         }
