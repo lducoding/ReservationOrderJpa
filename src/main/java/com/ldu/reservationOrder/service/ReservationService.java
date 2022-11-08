@@ -25,13 +25,13 @@ public class ReservationService {
         ResUser resUser = resUserRepository.findById(reservationDto.getResUserId())
                 .orElseGet(() -> ResUser.builder().resUserId(-1L).build());
 
-        Restaurant restaurant = restaurantRepository.findById(reservationDto.getRestaurantId())
-                .orElseGet(() -> Restaurant.builder().restaurantId(-1L).build());
+//        Restaurant restaurant = restaurantRepository.findById(reservationDto.getRestaurantId())
+//                .orElseGet(() -> Restaurant.builder().restaurantId(-1L).build());
 
         // 이것과 같이 프록시 객체로 저장해도 상관없을거 같다.
 //        ResUser resUser = resUserRepository.getReferenceById(reservationDto.getResUserId());
-//
-//        Restaurant restaurant = restaurantRepository.getReferenceById(reservationDto.getRestaurantId());
+
+        Restaurant restaurant = restaurantRepository.getReferenceById(reservationDto.getRestaurantId());
 
         if (resUser.getResUserId() == -1L || restaurant.getRestaurantId() == -1L) {
             return -1L;
