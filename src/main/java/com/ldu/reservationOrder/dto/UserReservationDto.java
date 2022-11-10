@@ -15,12 +15,11 @@ public class UserReservationDto {
     private List<MenuDto> menuList;
 
     @QueryProjection
-    public UserReservationDto(Long reservationId, Long resUserId, Long restaurantId, String reservationDate, String reservationStatus, List<MenuDto> menuList) {
+    public UserReservationDto(Long reservationId, Long resUserId, Long restaurantId, String reservationDate, String reservationStatus) {
         this.reservationId = reservationId;
         this.resUserId = resUserId;
         this.restaurantId = restaurantId;
         this.reservationDate = reservationDate;
         this.reservationStatus = reservationStatus;
-        this.menuList = menuList;
     }
 }
