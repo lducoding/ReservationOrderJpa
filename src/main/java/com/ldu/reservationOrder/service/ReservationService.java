@@ -1,6 +1,8 @@
 package com.ldu.reservationOrder.service;
 
+import com.ldu.reservationOrder.dto.ConfirmReservationDto;
 import com.ldu.reservationOrder.dto.ReservationDto;
+import com.ldu.reservationOrder.dto.UserReservationDto;
 import com.ldu.reservationOrder.entity.*;
 import com.ldu.reservationOrder.repository.*;
 
@@ -49,5 +51,15 @@ public class ReservationService {
             reservationJdbcRepository.insertReservationMenuList(reservationDto.getMenuIdList(), savedReservation.getReservationId());
             return savedReservation.getReservationId();
         }
+    }
+
+    public List<ConfirmReservationDto> registerReservationConfirm(Long reservationId) {
+
+
+        return null;
+    }
+
+    public List<UserReservationDto> getUserReservationList(Long id, String userRole) {
+        return reservationRepository.getUserReservationList(id, userRole);
     }
 }
