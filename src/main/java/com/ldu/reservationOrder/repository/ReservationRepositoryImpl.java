@@ -25,7 +25,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
     @Override
     public List<UserReservationDto> getUserReservationList(Long id, String userRole) {
 
-        Class<? extends List> aClass = queryFactory.select(
+        List<MenuDto> menuDtoList = queryFactory.select(
                 new QMenuDto(
                     menu.menuId,
                     menu.restaurantMenu.restaurantId,
@@ -34,7 +34,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
                     menu.menuImg)
             )
             .from(menu, reservationMenu)
-            .where(menu.menuId.eq(reservationMenu.menu.menuId)).fetch().getClass();
+            .where(menu.menuId.eq(reservationMenu.menu.menuId)).fetch();
 
         List<UserReservationDto> userReservationDtoList = queryFactory.select(
                 new QUserReservationDto(
