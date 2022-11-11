@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.service;
 
 import com.ldu.reservationOrder.dto.ConfirmReservationDto;
+import com.ldu.reservationOrder.dto.MenuDto;
 import com.ldu.reservationOrder.dto.ReservationDto;
 import com.ldu.reservationOrder.dto.UserReservationDto;
 import com.ldu.reservationOrder.entity.*;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -59,7 +61,15 @@ public class ReservationService {
         return null;
     }
 
+    @Transactional
     public List<UserReservationDto> getUserReservationList(Long id, String userRole) {
-        return reservationRepository.getUserReservationList(id, userRole);
+        List<UserReservationDto> userReservationList = reservationRepository.getUserReservationList(id, userRole);
+
+        for (UserReservationDto userReservationDto : userReservationList) {
+            List<MenuDto> userReservationMenuList = reservationRepository.getUserReservationMenuList(userReservationDto.getReservationId());
+            userReservationDto.setMenuList(userReservationMenuList);
+        }
+
+        return userReservationList;
     }
 }

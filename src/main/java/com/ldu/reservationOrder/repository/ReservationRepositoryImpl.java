@@ -27,34 +27,49 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
     @Override
     public List<UserReservationDto> getUserReservationList(Long id, String userRole) {
 
+//        List<MenuDto> menuDtoList = queryFactory.select(
+//                new QMenuDto(
+//                    menu.menuId,
+//                    menu.restaurantMenu.restaurantId,
+//                    menu.menuName,
+//                    menu.menuPrice,
+//                    menu.menuImg)
+//            )
+//            .from(menu, reservationMenu)
+//            .where(menu.menuId.eq(reservationMenu.menu.menuId)).fetch();
+
+        List<UserReservationDto> userReservationDtoList = queryFactory.select(
+                new QUserReservationDto(
+                    reservation.reservationId,
+                    reservation.resUser.resUserId,
+                    reservation.restaurantReservation.restaurantId,
+                    reservation.reservationDate,
+                    reservation.reservationStatus
+                ))
+            .from(reservation)
+            .where(reservation.resUser.resUserId.eq(id))
+            .fetch();
+
+        return userReservationDtoList;
+
+    }
+
+    @Override
+    public List<MenuDto> getUserReservationMenuList(Long id) {
         List<MenuDto> menuDtoList = queryFactory.select(
                 new QMenuDto(
                     menu.menuId,
                     menu.restaurantMenu.restaurantId,
                     menu.menuName,
                     menu.menuPrice,
-                    menu.menuImg)
-            )
+                    menu.menuImg
+                ))
             .from(menu, reservationMenu)
-            .where(menu.menuId.eq(reservationMenu.menu.menuId)).fetch();
-
-        List<UserReservationDto> userReservationDtoList = queryFactory.select(
-                        new QUserReservationDto(
-                                reservation.reservationId,
-                                reservation.resUser.resUserId,
-                                reservation.restaurantReservation.restaurantId,
-                                reservation.reservationDate,
-                                reservation.reservationStatus
-                        ))
-                .from(reservation, menu, reservationMenu)
-                .where(
-                        reservation.reservationId.eq(reservationMenu.reservationMenuId)
-//                    .and(menu.menuId.eq(reservationMenu.menu.menuId))
-                                .and(reservation.restaurantReservation.restaurantId.eq(id))
-                ).fetch();
-
-        return userReservationDtoList;
-
+            .where(
+                reservationMenu.reservation.reservationId.eq(id)
+                    .and(reservationMenu.menu.menuId.eq(menu.menuId))
+            ).fetch();
+        return menuDtoList;
     }
 
 }
