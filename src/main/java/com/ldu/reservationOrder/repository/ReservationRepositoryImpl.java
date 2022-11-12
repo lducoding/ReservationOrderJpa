@@ -11,6 +11,7 @@ import com.ldu.reservationOrder.dto.QUserReservationDto;
 import com.ldu.reservationOrder.dto.UserReservationDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -47,7 +48,10 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
                     reservation.reservationStatus
                 ))
             .from(reservation)
-            .where(reservation.resUser.resUserId.eq(id))
+            .where(
+                    new CaseBuilder().when(userRole.equals("ROLE_CUSTOMER")).then(reservation.resUser.resUserId.eq(id))
+                            .otherwise()
+            )
             .fetch();
 
         return userReservationDtoList;
