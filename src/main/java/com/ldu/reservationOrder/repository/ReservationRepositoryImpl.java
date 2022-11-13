@@ -4,6 +4,7 @@ import static com.ldu.reservationOrder.entity.QMenu.menu;
 import static com.ldu.reservationOrder.entity.QResUser.resUser;
 import static com.ldu.reservationOrder.entity.QReservation.reservation;
 import static com.ldu.reservationOrder.entity.QReservationMenu.reservationMenu;
+import static org.springframework.util.StringUtils.hasText;
 
 import com.ldu.reservationOrder.dto.MenuDto;
 import com.ldu.reservationOrder.dto.QMenuDto;
@@ -11,6 +12,7 @@ import com.ldu.reservationOrder.dto.QUserReservationDto;
 import com.ldu.reservationOrder.dto.UserReservationDto;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -48,10 +50,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
                     reservation.reservationStatus
                 ))
             .from(reservation)
-            .where(
-                    new CaseBuilder().when(userRole.equals("ROLE_CUSTOMER")).then(reservation.resUser.resUserId.eq(id))
-                            .otherwise()
-            )
+                .where(checkRole(userRole, id))
             .fetch();
 
         return userReservationDtoList;
@@ -74,6 +73,15 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
                     .and(reservationMenu.menu.menuId.eq(menu.menuId))
             ).fetch();
         return menuDtoList;
+    }
+
+    private BooleanExpression checkRole(String userRole, Long id) {
+
+        if(userRole == "ROLE_CUSTOMER") {
+            return reservation.resUser.resUserId.eq(id);
+        } else {
+            return reservation.restaurantReservation.restaurantId.eq(id);
+        }
     }
 
 }
