@@ -6,7 +6,9 @@ import static com.ldu.reservationOrder.entity.QReservation.reservation;
 import static com.ldu.reservationOrder.entity.QReservationMenu.reservationMenu;
 import static org.springframework.util.StringUtils.hasText;
 
+import com.ldu.reservationOrder.dto.ConfirmReservationDto;
 import com.ldu.reservationOrder.dto.MenuDto;
+import com.ldu.reservationOrder.dto.QConfirmReservationDto;
 import com.ldu.reservationOrder.dto.QMenuDto;
 import com.ldu.reservationOrder.dto.QUserReservationDto;
 import com.ldu.reservationOrder.dto.UserReservationDto;
@@ -50,7 +52,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
                     reservation.reservationStatus
                 ))
             .from(reservation)
-                .where(checkRole(userRole, id))
+            .where(checkRole(userRole, id))
             .fetch();
 
         return userReservationDtoList;
@@ -75,9 +77,39 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
         return menuDtoList;
     }
 
+    @Override
+    public ConfirmReservationDto registerReservationConfirm(Long reservationId) {
+        ConfirmReservationDto confirmReservationDto = queryFactory.select(
+                new QConfirmReservationDto(reservation.resUser.resUserId,
+                    reservation.restaurantReservation.restaurantId,
+                    reservation.reservationStatus, reservation.reservationDate)
+            ).distinct().from(reservation, menu, reservationMenu)
+            .where(reservation.reservationId.eq(reservationId)
+                .and(reservation.reservationId.eq(reservationMenu.reservation.reservationId))
+                .and(reservationMenu.menu.menuId.eq(menu.menuId))
+            ).fetchOne();
+
+        List<MenuDto> menuDtoList = queryFactory.select(
+                new QMenuDto(
+                    menu.menuId,
+                    menu.restaurantMenu.restaurantId,
+                    menu.menuName,
+                    menu.menuPrice,
+                    menu.menuImg
+                )
+            ).from(reservation, menu, reservationMenu)
+            .where(reservation.reservationId.eq(reservationId)
+                .and(reservation.reservationId.eq(reservationMenu.reservation.reservationId))
+                .and(reservationMenu.menu.menuId.eq(menu.menuId))
+            ).fetch();
+
+        confirmReservationDto.setMenuList(menuDtoList);
+        return confirmReservationDto;
+    }
+
     private BooleanExpression checkRole(String userRole, Long id) {
 
-        if(userRole == "ROLE_CUSTOMER") {
+        if (userRole == "ROLE_CUSTOMER") {
             return reservation.resUser.resUserId.eq(id);
         } else {
             return reservation.restaurantReservation.restaurantId.eq(id);

@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.repository;
 
 
+import com.ldu.reservationOrder.dto.ConfirmReservationDto;
 import com.ldu.reservationOrder.dto.MenuDto;
 import com.ldu.reservationOrder.dto.UserReservationDto;
 import java.util.List;
@@ -11,4 +12,5 @@ public interface ReservationRepositoryCustom {
 
     List<MenuDto> getUserReservationMenuList(Long id);
 
+    ConfirmReservationDto registerReservationConfirm(Long id);
 }

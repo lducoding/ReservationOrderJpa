@@ -24,7 +24,7 @@ public class ReservationService {
     private final ReservationMenuRepository reservationMenuRepository;
     private final ReservationJdbcRepository reservationJdbcRepository;
 
-
+    @Transactional
     public Long registerReservation(ReservationDto reservationDto) {
         ResUser resUser = resUserRepository.findById(reservationDto.getResUserId())
                 .orElseGet(() -> ResUser.builder().resUserId(-1L).build());
@@ -55,12 +55,6 @@ public class ReservationService {
         }
     }
 
-    public List<ConfirmReservationDto> registerReservationConfirm(Long reservationId) {
-
-
-        return null;
-    }
-
     @Transactional
     public List<UserReservationDto> getUserReservationList(Long id, String userRole) {
         List<UserReservationDto> userReservationList = reservationRepository.getUserReservationList(id, userRole);
@@ -71,5 +65,9 @@ public class ReservationService {
         }
 
         return userReservationList;
+    }
+
+    public ConfirmReservationDto registerReservationConfirm(Long reservationId) {
+        return reservationRepository.registerReservationConfirm(reservationId);
     }
 }

@@ -36,14 +36,15 @@ public class ReservationController {
         HttpHeaders httpHeaders = new HttpHeaders();
 //        UserRole roles = principalDetails.getUserInfo().getRoles();
 //        List<UserReservationDto> userReservationList = reservationService.getUserReservationList(id, String.valueOf(principalDetails.getUserInfo().getRoles()));
+//        List<UserReservationDto> userReservationList = reservationService.getUserReservationList(id, "ROLE_SELLER");
         List<UserReservationDto> userReservationList = reservationService.getUserReservationList(id, "ROLE_CUSTOMER");
         return new ResponseEntity<List<UserReservationDto>>(userReservationList, httpHeaders, HttpStatus.OK);
     }
 
     @GetMapping("/registerReservationConfirm/{reservationId}")
-    public ResponseEntity<List<ConfirmReservationDto>> registerReservation(@PathVariable Long reservationId) {
+    public ResponseEntity<ConfirmReservationDto> registerReservation(@PathVariable Long reservationId) {
         HttpHeaders httpHeaders = new HttpHeaders();
-        List<ConfirmReservationDto> confirmReservationDto = reservationService.registerReservationConfirm(reservationId);
-        return new ResponseEntity<List<ConfirmReservationDto>>(confirmReservationDto, httpHeaders, HttpStatus.OK);
+        ConfirmReservationDto confirmReservationDto = reservationService.registerReservationConfirm(reservationId);
+        return new ResponseEntity<ConfirmReservationDto>(confirmReservationDto, httpHeaders, HttpStatus.OK);
     }
 }
