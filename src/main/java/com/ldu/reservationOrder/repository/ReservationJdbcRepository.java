@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.repository;
 
+import com.ldu.reservationOrder.entity.ReservationMenu;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
