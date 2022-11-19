@@ -12,11 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -46,5 +42,12 @@ public class ReservationController {
         HttpHeaders httpHeaders = new HttpHeaders();
         ConfirmReservationDto confirmReservationDto = reservationService.registerReservationConfirm(reservationId);
         return new ResponseEntity<ConfirmReservationDto>(confirmReservationDto, httpHeaders, HttpStatus.OK);
+    }
+
+    @PutMapping("/reservationStatus")
+    public ResponseEntity<Long> updateReservationStatus(@RequestParam Long reservationId, @RequestParam String status) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        Long statusOk = reservationService.updateReservationStatus(reservationId,status);
+        return new ResponseEntity<Long>(statusOk, httpHeaders, HttpStatus.OK);
     }
 }
