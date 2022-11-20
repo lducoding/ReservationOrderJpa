@@ -70,4 +70,8 @@ public class ReservationService {
     public ConfirmReservationDto registerReservationConfirm(Long reservationId) {
         return reservationRepository.registerReservationConfirm(reservationId);
     }
+
+    public Long updateReservationStatus(Long reservationId, String status) {
+        return null;
+    }
 }
