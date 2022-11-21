@@ -72,6 +72,7 @@ public class ReservationService {
     }
 
     public Long updateReservationStatus(Long reservationId, String status) {
+
         return null;
     }
 }
