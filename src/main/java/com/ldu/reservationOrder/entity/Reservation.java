@@ -29,6 +29,10 @@ public class Reservation {
     private String reservationDate;
     private String reservationStatus;
 
+    public void setReservationStatus(String reservationStatus) {
+        this.reservationStatus = reservationStatus;
+    }
+
     @Builder
     public Reservation(Long reservationId, ResUser resUser, Restaurant restaurantReservation,
         String reservationDate, String reservationStatus) {

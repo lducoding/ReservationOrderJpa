@@ -71,8 +71,14 @@ public class ReservationService {
         return reservationRepository.registerReservationConfirm(reservationId);
     }
 
+    @Transactional
     public Long updateReservationStatus(Long reservationId, String status) {
-
-        return null;
+        Reservation reservation = reservationRepository.findById(reservationId).orElseGet(() -> Reservation.builder().reservationId(0L).build());
+        if(reservation.getReservationId() == 0) {
+            return 0L;
+        } else {
+            reservation.setReservationStatus(status);
+        }
+        return reservation.getReservationId();
     }
 }
