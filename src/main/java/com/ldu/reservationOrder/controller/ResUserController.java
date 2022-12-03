@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.controller;
 
 import com.ldu.reservationOrder.dto.ResUserDto;
+import com.ldu.reservationOrder.dto.UpdatePasswordDto;
 import com.ldu.reservationOrder.entity.ResUser;
 import com.ldu.reservationOrder.service.ResUserService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,11 @@ public class ResUserController {
         ResUserDto userInfo = resUserService.userInfo(resUserId);
         ResponseEntity<ResUserDto> resUserDtoResponseEntity = new ResponseEntity<>(userInfo, httpHeaders, HttpStatus.OK);
         return resUserDtoResponseEntity;
+    }
+
+    @PutMapping("/password")
+    public void updatePassword(@RequestBody UpdatePasswordDto updatePasswordDto) {
+        resUserService.updatePassword(updatePasswordDto);
     }
 
     @PostMapping("/user")

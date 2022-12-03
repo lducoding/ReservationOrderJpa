@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.service;
 
 import com.ldu.reservationOrder.dto.ResUserDto;
+import com.ldu.reservationOrder.dto.UpdatePasswordDto;
 import com.ldu.reservationOrder.entity.ResUser;
 import com.ldu.reservationOrder.repository.ResUserRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +46,9 @@ public class ResUserService {
         }
         System.out.println("중복");
         return true;
+    }
+
+    public void updatePassword(UpdatePasswordDto updatePasswordDto) {
+
     }
 }
