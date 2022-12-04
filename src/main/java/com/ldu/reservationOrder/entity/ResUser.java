@@ -47,6 +47,10 @@ public class ResUser {
         this.name = name;
     }
 
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     @Builder
     public ResUser(Long resUserId, Restaurant restaurant, String pass, String name, String email,
         UserRole roles, String birth, int mileage, List<Reservation> reservations) {

@@ -5,6 +5,7 @@ import com.ldu.reservationOrder.dto.UpdatePasswordDto;
 import com.ldu.reservationOrder.entity.ResUser;
 import com.ldu.reservationOrder.repository.ResUserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -48,7 +49,9 @@ public class ResUserService {
         return true;
     }
 
+    @Transactional
     public void updatePassword(UpdatePasswordDto updatePasswordDto) {
-
+        ResUser resUser = resUserRepository.findById(updatePasswordDto.getResUserId()).get();
+        resUser.setPass("{noop}"+updatePasswordDto.getPass());
     }
 }
