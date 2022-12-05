@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.entity;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "RESTAURANT")
+@AllArgsConstructor
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Restaurant {
 
@@ -49,18 +52,4 @@ public class Restaurant {
         goal.setRestaurant(this);
     }
 
-    @Builder
-    public Restaurant(Long restaurantId, ResUser resUser, Goal goal, String location,
-        String restaurantName, String category, int standardTime, List<Reservation> reservations,
-        List<Menu> menus) {
-        this.restaurantId = restaurantId;
-        this.resUser = resUser;
-        this.goal = goal;
-        this.location = location;
-        this.restaurantName = restaurantName;
-        this.category = category;
-        this.standardTime = standardTime;
-        this.reservations = reservations;
-        this.menus = menus;
-    }
 }

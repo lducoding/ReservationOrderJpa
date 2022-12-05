@@ -2,6 +2,7 @@ package com.ldu.reservationOrder.entity;
 
 import com.ldu.reservationOrder.dto.ResUserDto;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,8 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "RES_USER")
+@AllArgsConstructor
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ResUser {
 
@@ -51,17 +54,4 @@ public class ResUser {
         this.pass = pass;
     }
 
-    @Builder
-    public ResUser(Long resUserId, Restaurant restaurant, String pass, String name, String email,
-        UserRole roles, String birth, int mileage, List<Reservation> reservations) {
-        this.resUserId = resUserId;
-        this.restaurant = restaurant;
-        this.pass = pass;
-        this.name = name;
-        this.email = email;
-        this.roles = roles;
-        this.birth = birth;
-        this.mileage = mileage;
-        this.reservations = reservations;
-    }
 }

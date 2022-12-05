@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.controller;
 
+import com.ldu.reservationOrder.dto.MenuDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,6 @@ public class RestaurantController {
   @GetMapping("/restaurants")
   public ResponseEntity<?> getRestaurantLists() {
     HttpHeaders httpHeaders = new HttpHeaders();
-    return new ResponseEntity<>(, httpHeaders, HttpStatus.OK);
+    return new ResponseEntity<>("", httpHeaders, HttpStatus.OK);
   }
 }

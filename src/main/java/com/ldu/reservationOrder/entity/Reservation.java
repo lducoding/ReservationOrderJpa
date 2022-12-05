@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.entity;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @Table(name = "RESERVATION")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation {
@@ -33,13 +36,4 @@ public class Reservation {
         this.reservationStatus = reservationStatus;
     }
 
-    @Builder
-    public Reservation(Long reservationId, ResUser resUser, Restaurant restaurantReservation,
-        String reservationDate, String reservationStatus) {
-        this.reservationId = reservationId;
-        this.resUser = resUser;
-        this.restaurantReservation = restaurantReservation;
-        this.reservationDate = reservationDate;
-        this.reservationStatus = reservationStatus;
-    }
 }
