@@ -13,8 +13,6 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "RESTAURANT")
-@AllArgsConstructor
-@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Restaurant {
 
@@ -41,6 +39,21 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurantMenu", cascade = CascadeType.ALL)
     private List<Menu> menus = new ArrayList<>();
+
+    @Builder
+    public Restaurant(Long restaurantId, ResUser resUser, Goal goal, String location,
+        String restaurantName, String category, int standardTime, List<Reservation> reservations,
+        List<Menu> menus) {
+        this.restaurantId = restaurantId;
+        this.resUser = resUser;
+        this.goal = goal;
+        this.location = location;
+        this.restaurantName = restaurantName;
+        this.category = category;
+        this.standardTime = standardTime;
+        this.reservations = reservations;
+        this.menus = menus;
+    }
 
     public void addResUser(ResUser resUser) {
         this.resUser = resUser;
