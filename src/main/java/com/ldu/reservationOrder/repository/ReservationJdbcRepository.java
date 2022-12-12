@@ -3,6 +3,7 @@ package com.ldu.reservationOrder.repository;
 import com.ldu.reservationOrder.entity.ReservationMenu;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.ldu.reservationOrder.dto.ResUserDto;
@@ -20,20 +21,11 @@ public class ReservationJdbcRepository {
     public void insertReservationMenuList(List<Long> menuIdList, Long reservationId) {
         jdbcTemplate.batchUpdate(
             "insert into RESERVATION_MENU (reservation_id, menu_id) values(?, ?);",
-            new BatchPreparedStatementSetter() {
-                @Override
-                public void setValues(PreparedStatement ps, int i) throws SQLException {
-                    ps.setLong(1, reservationId);
-                    ps.setLong(2, menuIdList.get(i));
-                }
-
-                @Override
-                public int getBatchSize() {
-                    return menuIdList.size();
-                }
+            menuIdList, 500, (ps, menuId) -> {
+              ps.setLong(1, reservationId);
+              ps.setLong(2, menuId);
             }
         );
-
     }
 
 }
