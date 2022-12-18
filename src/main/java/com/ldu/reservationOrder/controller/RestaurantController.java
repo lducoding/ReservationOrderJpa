@@ -3,6 +3,8 @@ package com.ldu.reservationOrder.controller;
 import com.ldu.reservationOrder.dto.RestaurantDto;
 import com.ldu.reservationOrder.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +20,9 @@ public class RestaurantController {
   private final RestaurantService restaurantService;
 
   @GetMapping("/restaurants")
-  public ResponseEntity<?> getRestaurantLists() {
+  public ResponseEntity<Page<RestaurantDto>> getRestaurantLists(Pageable pageable) {
     HttpHeaders httpHeaders = new HttpHeaders();
-    List<RestaurantDto> restaurantLists = restaurantService.getRestaurantLists();
-    return new ResponseEntity<>("", httpHeaders, HttpStatus.OK);
+    Page<RestaurantDto> restaurantLists = restaurantService.getRestaurantLists(pageable);
+    return new ResponseEntity<Page<RestaurantDto>>(restaurantLists, httpHeaders, HttpStatus.OK);
   }
 }

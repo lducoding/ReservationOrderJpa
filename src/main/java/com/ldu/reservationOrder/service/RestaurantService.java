@@ -20,12 +20,6 @@ public class RestaurantService {
   private final RestaurantRepository restaurantRepository;
 
   public Page<RestaurantDto> getRestaurantLists(Pageable pageable) {
-
-    PageRequest pageRequest = PageRequest.of(page, size);
-    int start = (int) pageRequest.getOffset();
-    int end = Math.min((start + pageRequest.getPageSize()), userList.size());
-    Page<User> userPage = new PageImpl<>(userList.subList(start, end), pageRequest, userList.size());
-
     List<RestaurantDto> collect = restaurantRepository.findAllRestaurantPaging(pageable).stream()
         .map(
             res -> {
@@ -41,8 +35,11 @@ public class RestaurantService {
             }
         ).collect(Collectors.toList());
 
-    new PageImpl<>(collect.)
+      PageRequest pageRequest = PageRequest.of(3, 1);
+      int start = (int) pageRequest.getOffset();
+      int end = Math.min((start + pageRequest.getPageSize()), collect.size());
+      Page<RestaurantDto> restaurantDtoPage = new PageImpl<>(collect.subList(start, end), pageRequest, collect.size());
 
-    return
+    return restaurantDtoPage;
   }
 }
