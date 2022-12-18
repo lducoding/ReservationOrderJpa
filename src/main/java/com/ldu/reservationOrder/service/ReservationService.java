@@ -21,7 +21,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final ResUserRepository resUserRepository;
     private final RestaurantRepository restaurantRepository;
-    private final ReservationMenuRepository reservationMenuRepository;
+//    private final ReservationMenuRepository reservationMenuRepository;
     private final ReservationJdbcRepository reservationJdbcRepository;
 
     @Transactional
