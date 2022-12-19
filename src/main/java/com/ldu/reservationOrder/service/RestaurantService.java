@@ -36,9 +36,7 @@ public class RestaurantService {
         ).collect(Collectors.toList());
 
       PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
-      int start = (int) pageRequest.getOffset();
-      int end = Math.min((start + pageRequest.getPageSize()), collect.size());
-      Page<RestaurantDto> restaurantDtoPage = new PageImpl<>(collect.subList(start, end), pageRequest, collect.size());
+      Page<RestaurantDto> restaurantDtoPage = new PageImpl<>(collect, pageRequest, collect.size());
 
     return restaurantDtoPage;
   }
