@@ -32,7 +32,7 @@ public class RestaurantController {
     public ResponseEntity<?> getSearchRestaurantLists(@RequestParam(defaultValue = "1") Integer pageNum,
                                                      @RequestParam(defaultValue = "8") Integer pageSize,
                                                      RestaurantSerchDto restaurantSerchDto) {
-      // dto의 값이 있는 걸로만 검색
-        return new ResponseEntity<>(restaurantDtoPageInfo, HttpStatus.OK);
+        restaurantService.getSearchRestaurantLists(restaurantSerchDto)
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 }

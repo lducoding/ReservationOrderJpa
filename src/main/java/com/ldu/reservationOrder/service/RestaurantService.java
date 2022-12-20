@@ -1,6 +1,7 @@
 package com.ldu.reservationOrder.service;
 
 import com.ldu.reservationOrder.dto.RestaurantDto;
+import com.ldu.reservationOrder.dto.RestaurantSerchDto;
 import com.ldu.reservationOrder.entity.Restaurant;
 import com.ldu.reservationOrder.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,9 @@ public class RestaurantService {
       Page<RestaurantDto> restaurantDtoPage = new PageImpl<>(collect, pageRequest, collect.size());
 
     return restaurantDtoPage;
+  }
+
+  public void getSearchRestaurantLists(RestaurantSerchDto restaurantSerchDto) {
+
   }
 }
