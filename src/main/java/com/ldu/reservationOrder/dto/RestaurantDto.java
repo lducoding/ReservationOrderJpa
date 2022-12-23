@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ public class RestaurantDto {
     private int standardTime;
 
     @Builder
+    @QueryProjection
     public RestaurantDto(Long restaurantId, Long resUserId, Long goalId, String location, String restaurantName, String category, int standardTime) {
         this.restaurantId = restaurantId;
         this.resUserId = resUserId;

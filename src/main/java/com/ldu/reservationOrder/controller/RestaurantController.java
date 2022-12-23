@@ -32,7 +32,7 @@ public class RestaurantController {
     public ResponseEntity<?> getSearchRestaurantLists(@RequestParam(defaultValue = "1") Integer pageNum,
                                                      @RequestParam(defaultValue = "8") Integer pageSize,
                                                      RestaurantSerchDto restaurantSerchDto) {
-        restaurantService.getSearchRestaurantLists(restaurantSerchDto)
+        restaurantService.getSearchRestaurantLists(restaurantSerchDto);
         return new ResponseEntity<>("", HttpStatus.OK);
     }
 }
