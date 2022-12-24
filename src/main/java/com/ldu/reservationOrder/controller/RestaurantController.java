@@ -29,10 +29,8 @@ public class RestaurantController {
     }
 
     @GetMapping("/searchRestaurants")
-    public ResponseEntity<?> getSearchRestaurantLists(@RequestParam(defaultValue = "1") Integer pageNum,
-                                                     @RequestParam(defaultValue = "8") Integer pageSize,
-                                                     RestaurantSerchDto restaurantSerchDto) {
-        restaurantService.getSearchRestaurantLists(restaurantSerchDto);
-        return new ResponseEntity<>("", HttpStatus.OK);
+    public ResponseEntity<List<RestaurantDto>> getSearchRestaurantLists(RestaurantSerchDto restaurantSerchDto) {
+        List<RestaurantDto> searchRestaurantLists = restaurantService.getSearchRestaurantLists(restaurantSerchDto);
+        return new ResponseEntity<List<RestaurantDto>>(searchRestaurantLists, HttpStatus.OK);
     }
 }

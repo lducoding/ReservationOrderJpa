@@ -42,7 +42,7 @@ public class RestaurantService {
     return restaurantDtoPage;
   }
 
-  public void getSearchRestaurantLists(RestaurantSerchDto restaurantSerchDto) {
-
+  public List<RestaurantDto> getSearchRestaurantLists(RestaurantSerchDto restaurantSerchDto) {
+      return restaurantRepository.getSearchRestaurantLists(restaurantSerchDto);
   }
 }
