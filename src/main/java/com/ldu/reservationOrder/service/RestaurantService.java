@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.service;
 
+import com.ldu.reservationOrder.dto.RestaurantDetailDto;
 import com.ldu.reservationOrder.dto.RestaurantDto;
 import com.ldu.reservationOrder.dto.RestaurantSerchDto;
 import com.ldu.reservationOrder.entity.Restaurant;
@@ -44,5 +45,10 @@ public class RestaurantService {
 
   public List<RestaurantDto> getSearchRestaurantLists(RestaurantSerchDto restaurantSerchDto) {
       return restaurantRepository.getSearchRestaurantLists(restaurantSerchDto);
+  }
+
+  public RestaurantDetailDto getRestaurantDetail(Long id) {
+
+    return null;
   }
 }
