@@ -5,6 +5,7 @@ import com.ldu.reservationOrder.dto.RestaurantDto;
 import com.ldu.reservationOrder.dto.RestaurantSerchDto;
 import com.ldu.reservationOrder.entity.Restaurant;
 import com.ldu.reservationOrder.repository.RestaurantRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -48,7 +49,7 @@ public class RestaurantService {
   }
 
   public RestaurantDetailDto getRestaurantDetail(Long id) {
-
+    Optional<Restaurant> restaurant = restaurantRepository.findById(id);
     return null;
   }
 }
