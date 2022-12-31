@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.repository;
 
+import com.ldu.reservationOrder.dto.RestaurantDetailDto;
 import com.ldu.reservationOrder.dto.RestaurantDto;
 import com.ldu.reservationOrder.dto.RestaurantSerchDto;
 import com.ldu.reservationOrder.entity.Restaurant;
@@ -12,4 +13,6 @@ import java.util.List;
 public interface RestaurantRepositoryCustom {
 
     List<RestaurantDto> getSearchRestaurantLists(RestaurantSerchDto restaurantSerchDto);
+
+    RestaurantDetailDto getRestaurantDetail(Long id);
 }

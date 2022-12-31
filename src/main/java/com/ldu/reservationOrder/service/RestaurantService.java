@@ -49,7 +49,7 @@ public class RestaurantService {
   }
 
   public RestaurantDetailDto getRestaurantDetail(Long id) {
-    Optional<Restaurant> restaurant = restaurantRepository.findById(id);
+
     return null;
   }
 }
