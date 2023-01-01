@@ -1,5 +1,6 @@
 package com.ldu.reservationOrder.service;
 
+import com.ldu.reservationOrder.dto.MenuDto;
 import com.ldu.reservationOrder.dto.RestaurantDetailDto;
 import com.ldu.reservationOrder.dto.RestaurantDto;
 import com.ldu.reservationOrder.dto.RestaurantSerchDto;
@@ -49,7 +50,9 @@ public class RestaurantService {
   }
 
   public RestaurantDetailDto getRestaurantDetail(Long id) {
-
-    return null;
+      RestaurantDetailDto restaurantDetailDto = restaurantRepository.getRestaurantDetail(id);
+      restaurantDetailDto.setMenuList(restaurantRepository.getRestaurantDetailMenuList(id));
+      restaurantDetailDto.setGoalDto(restaurantRepository.getRestaurantDetailGoal(id));
+      return restaurantDetailDto;
   }
 }

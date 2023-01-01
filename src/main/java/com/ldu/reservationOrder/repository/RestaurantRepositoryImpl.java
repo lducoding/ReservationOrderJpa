@@ -10,6 +10,7 @@ import com.ldu.reservationOrder.dto.QConfirmReservationDto;
 import com.ldu.reservationOrder.dto.QMenuDto;
 import com.ldu.reservationOrder.dto.QUserReservationDto;
 import com.ldu.reservationOrder.entity.QGoal;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -47,7 +48,24 @@ public class RestaurantRepositoryImpl implements RestaurantRepositoryCustom {
 
     @Override
     public RestaurantDetailDto getRestaurantDetail(Long id) {
-        List<MenuDto> menuDtoList = queryFactory.select(
+        return queryFactory.select(new QRestaurantDetailDto(
+                        restaurant.restaurantId,
+                        null,
+                        restaurant.location,
+                        restaurant.restaurantName,
+                        restaurant.category,
+                        restaurant.standardTime,
+                        null
+                )).from(restaurant, menu, goal)
+                .where(restaurant.restaurantId.eq(id)
+                        .and(restaurant.restaurantId.eq(menu.restaurantMenu.restaurantId))
+                        .and(menu.restaurantMenu.restaurantId.eq(goal.restaurant.restaurantId)))
+                .fetchOne();
+    }
+
+    @Override
+    public List<MenuDto> getRestaurantDetailMenuList(Long id) {
+        return queryFactory.select(
                         new QMenuDto(
                                 menu.menuId, menu.restaurantMenu.restaurantId, menu.menuName, menu.menuPrice, menu.menuImg
                         )
@@ -56,38 +74,25 @@ public class RestaurantRepositoryImpl implements RestaurantRepositoryCustom {
                         .and(restaurant.restaurantId.eq(menu.restaurantMenu.restaurantId))
                         .and(menu.restaurantMenu.restaurantId.eq(goal.restaurant.restaurantId)))
                 .fetch();
+    }
 
-        GoalDto goalDto = queryFactory.select(
-                        new QGoalDto(
-                                goal.goalId,
-                                goal.restaurant.restaurantId,
-                                goal.goalType.stringValue(),
-                                goal.goalMoney,
-                                goal.recentMoney,
-                                goal.success,
-                                goal.registerDate
-                        )
-                ).from(restaurant, menu, goal)
-                .where(restaurant.restaurantId.eq(id)
-                        .and(restaurant.restaurantId.eq(menu.restaurantMenu.restaurantId))
-                        .and(menu.restaurantMenu.restaurantId.eq(goal.restaurant.restaurantId)))
-                .fetchOne();
-
-        queryFactory.select(new QRestaurantDetailDto(
-                        restaurant.restaurantId,
-                        menuDtoList,
-                        restaurant.location,
-                        restaurant.restaurantName,
-                        restaurant.category,
-                        restaurant.standardTime,
-                        goalDto
-                )).from(restaurant, menu, goal)
-                .where(restaurant.restaurantId.eq(id)
-                        .and(restaurant.restaurantId.eq(menu.restaurantMenu.restaurantId))
-                        .and(menu.restaurantMenu.restaurantId.eq(goal.restaurant.restaurantId)))
-                .fetch();
-
-        return null;
+    @Override
+    public GoalDto getRestaurantDetailGoal(Long id) {
+                return queryFactory.select(
+                                new QGoalDto(
+                                        goal.goalId,
+                                        goal.restaurant.restaurantId,
+                                        goal.goalType.stringValue(),
+                                        goal.goalMoney,
+                                        goal.recentMoney,
+                                        goal.success,
+                                        goal.registerDate
+                                )
+                        ).from(restaurant, menu, goal)
+                        .where(restaurant.restaurantId.eq(id)
+                                .and(restaurant.restaurantId.eq(menu.restaurantMenu.restaurantId))
+                                .and(menu.restaurantMenu.restaurantId.eq(goal.restaurant.restaurantId)))
+                        .fetchOne();
     }
 
     private BooleanExpression locationLike(String location) {

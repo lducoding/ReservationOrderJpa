@@ -1,8 +1,6 @@
 package com.ldu.reservationOrder.repository;
 
-import com.ldu.reservationOrder.dto.RestaurantDetailDto;
-import com.ldu.reservationOrder.dto.RestaurantDto;
-import com.ldu.reservationOrder.dto.RestaurantSerchDto;
+import com.ldu.reservationOrder.dto.*;
 import com.ldu.reservationOrder.entity.Restaurant;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +13,7 @@ public interface RestaurantRepositoryCustom {
     List<RestaurantDto> getSearchRestaurantLists(RestaurantSerchDto restaurantSerchDto);
 
     RestaurantDetailDto getRestaurantDetail(Long id);
+
+    List<MenuDto> getRestaurantDetailMenuList(Long id);
+    GoalDto getRestaurantDetailGoal(Long id);
 }

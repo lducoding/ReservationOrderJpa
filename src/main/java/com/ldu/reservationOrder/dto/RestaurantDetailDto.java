@@ -30,4 +30,6 @@ public class RestaurantDetailDto {
         this.standardTime = standardTime;
         this.goalDto = goalDto;
     }
+
+
 }
